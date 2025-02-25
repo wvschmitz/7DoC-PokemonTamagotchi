@@ -1,29 +1,33 @@
-﻿namespace _7DoC_PokemonTamagotchi.Services;
+﻿using _7DoC_PokemonTamagotchi.Response;
+using Newtonsoft.Json;
+
+namespace _7DoC_PokemonTamagotchi.Services;
 
 internal class PokeAPIGetListPokemonsName : PokeAPI
 {
-    private string _next_url = "https://pokeapi.co/api/v2/pokemon";
+    private string _next_url = "https://pokeapi.co/api/v2/pokemon/";
     private string _previous_url = "";
 
-    private void GetListPokemon(string url)
+    private ResponseNamedAPIResourceList GetListPokemon(string url)
     {
         var response = GetUrl(url);
-        Console.WriteLine(response.Content);
 
-        /* To-Do
-         * Realizar o processamento do retorno do next_url e previous_url
-         * Realizar o processamento dos nomes do pokemons
-         */
+        var obj = JsonConvert.DeserializeObject<ResponseNamedAPIResourceList>(response.Content);
+
+        _next_url = obj.Next;
+        _previous_url = obj.Previous;
+
+        return obj;
     }
 
-    public void NextPage()
+    public ResponseNamedAPIResourceList NextPage()
     {
-        GetListPokemon(_next_url);
+        return GetListPokemon(_next_url);
     }
 
-    public void PreviusPage()
+    public ResponseNamedAPIResourceList PreviusPage()
     {
-        GetListPokemon(_previous_url);
+        return GetListPokemon(_previous_url);
     }
 
     public bool HasPreviousPage()
