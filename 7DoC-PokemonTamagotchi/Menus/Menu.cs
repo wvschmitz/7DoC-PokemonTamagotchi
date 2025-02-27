@@ -1,17 +1,42 @@
-﻿namespace _7DoC_PokemonTamagotchi.Menus;
+﻿using System;
+using _7DoC_PokemonTamagotchi.Controller;
 
-internal abstract class Menu
+namespace _7DoC_PokemonTamagotchi.Menus;
+
+internal class Menu
 {
-    public string TituloMenu { get; protected set; }
+    Dictionary<int, BaseController> _controllers = new();
 
-    public abstract void Executar();
+    public Menu()
+    {
+        _controllers.Add(1, new AdotarMascoteController());
+        _controllers.Add(2, new MascotesAdotadosController());
+        _controllers.Add(3, new SairController());
+    }
 
-    public void ExibirCaption(string texto)
+    public void Exibir()
     {
         Console.Clear();
-        string asteriscos = string.Empty.PadLeft(texto.Length, '*');
-        Console.WriteLine(asteriscos);
-        Console.WriteLine(texto.ToUpper());
-        Console.WriteLine(asteriscos + "\n");
+
+        foreach (var menu in _controllers)
+        {
+            Console.WriteLine($"{menu.Key} - {menu.Value.TituloMenu}");
+        }
+
+        Console.Write("\nDigite a opção desejada: ");
+        int opcao = int.Parse(Console.ReadLine());
+
+        if (_controllers.ContainsKey(opcao))
+        {
+            _controllers[opcao].Executar();
+
+            if (!(_controllers[opcao] is SairController)) Exibir();
+        }
+        else
+        {
+            Console.WriteLine("Opção inválida!");
+            Thread.Sleep(2000);
+            Exibir();
+        }
     }
 }

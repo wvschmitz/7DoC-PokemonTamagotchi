@@ -1,8 +1,8 @@
-﻿namespace _7DoC_PokemonTamagotchi.Menus;
+﻿namespace _7DoC_PokemonTamagotchi.Controller;
 
-internal class MenuMascotesAdotados : Menu
+internal class MascotesAdotadosController : BaseController
 {
-    public MenuMascotesAdotados()
+    public MascotesAdotadosController()
     {
         TituloMenu = "Visualizar mascotes adotados";
     }
