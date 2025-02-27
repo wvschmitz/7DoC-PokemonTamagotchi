@@ -1,4 +1,4 @@
-﻿namespace _7DoC_PokemonTamagotchi.Modelos;
+﻿namespace _7DoC_PokemonTamagotchi.Modelo;
 
 internal class Jogador
 {

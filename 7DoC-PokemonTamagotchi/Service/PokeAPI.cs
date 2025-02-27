@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace _7DoC_PokemonTamagotchi.Services;
+namespace _7DoC_PokemonTamagotchi.Service;
 
 internal class PokeAPI
 {

@@ -2,7 +2,7 @@
 using _7DoC_PokemonTamagotchi.Response;
 using Newtonsoft.Json;
 
-namespace _7DoC_PokemonTamagotchi.Services;
+namespace _7DoC_PokemonTamagotchi.Service;
 
 internal class PokeAPIGetPokemon : PokeAPI
 {

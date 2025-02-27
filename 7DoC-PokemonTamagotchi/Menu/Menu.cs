@@ -1,7 +1,6 @@
-﻿using System;
-using _7DoC_PokemonTamagotchi.Controller;
+﻿using _7DoC_PokemonTamagotchi.Controller;
 
-namespace _7DoC_PokemonTamagotchi.Menus;
+namespace _7DoC_PokemonTamagotchi.Menu;
 
 internal class Menu
 {

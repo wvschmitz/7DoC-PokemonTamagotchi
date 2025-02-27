@@ -1,5 +1,5 @@
-﻿using _7DoC_PokemonTamagotchi.Menus;
-using _7DoC_PokemonTamagotchi.Modelos;
+﻿using _7DoC_PokemonTamagotchi.Menu;
+using _7DoC_PokemonTamagotchi.Modelo;
 
 Console.WriteLine("Qual seu nome");
 Jogador jogador = new Jogador();

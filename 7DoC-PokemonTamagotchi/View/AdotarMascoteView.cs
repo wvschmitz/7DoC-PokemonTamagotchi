@@ -2,7 +2,7 @@
 using _7DoC_PokemonTamagotchi.Controller;
 using _7DoC_PokemonTamagotchi.Enum;
 using _7DoC_PokemonTamagotchi.Response;
-using _7DoC_PokemonTamagotchi.Services;
+using _7DoC_PokemonTamagotchi.Service;
 
 namespace _7DoC_PokemonTamagotchi.View;
 
