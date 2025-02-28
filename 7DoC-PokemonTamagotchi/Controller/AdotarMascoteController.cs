@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 using _7DoC_PokemonTamagotchi.Enum;
+using _7DoC_PokemonTamagotchi.Model;
+using _7DoC_PokemonTamagotchi.Modelo;
 using _7DoC_PokemonTamagotchi.Response;
 using _7DoC_PokemonTamagotchi.Service;
 using _7DoC_PokemonTamagotchi.View;
@@ -29,13 +31,13 @@ internal class AdotarMascoteController : BaseController
 
             switch (selecionado)
             {
-                case OpcaoSelecionada.osProximaPagina:
+                case OpcaoAdocao.osProximaPagina:
                     pagina = _api.NextPage();
                     break;
-                case OpcaoSelecionada.osVoltarPagina:
+                case OpcaoAdocao.osVoltarPagina:
                     pagina = _api.PreviusPage();
                     break;
-                case OpcaoSelecionada.osSair:
+                case OpcaoAdocao.osSair:
                     continuar = false;
                     break;
                 default:
@@ -44,7 +46,7 @@ internal class AdotarMascoteController : BaseController
         }
     }
 
-    private OpcaoSelecionada ExibirMascotes(List<ResponseNamedAPIResource> mascotes)
+    private OpcaoAdocao ExibirMascotes(List<ResponseNamedAPIResource> mascotes)
     {
         string opcao = _view.ExibirMascotes(mascotes, _api.Pagina, _api.HasPreviousPage());
 
@@ -52,13 +54,18 @@ internal class AdotarMascoteController : BaseController
         
         if (detalhe != null)
         {
-            OpcaoSelecionada selecionado = _view.ExibirDetalhesMascote(detalhe);
+            PokeAPIGetPokemon pokeAPIGetPokemon = new PokeAPIGetPokemon();
+            var pokemom = pokeAPIGetPokemon.GetPokemon(detalhe.Name);
 
-            if (selecionado == OpcaoSelecionada.osAdotar)
+            OpcaoAdocao selecionado = _view.ExibirDetalhesMascote(pokemom);
+
+            if (selecionado == OpcaoAdocao.osAdotar)
             {
+                Jogador.Instacia.AdotarMascote(Mascote.LoadFromResponse(pokemom));
+
                 Console.WriteLine($"{detalhe.Name} adotado");
                 Thread.Sleep(2000);
-                return OpcaoSelecionada.osSair;
+                return OpcaoAdocao.osSair;
             }
             else
             {
@@ -66,13 +73,13 @@ internal class AdotarMascoteController : BaseController
             }
         }
 
-        if (opcao == "1") return OpcaoSelecionada.osSair;
-        if (opcao == "2") return  OpcaoSelecionada.osProximaPagina;
-        if (opcao == "3" && _api.HasPreviousPage()) return OpcaoSelecionada.osVoltarPagina;
+        if (opcao == "1") return OpcaoAdocao.osSair;
+        if (opcao == "2") return  OpcaoAdocao.osProximaPagina;
+        if (opcao == "3" && _api.HasPreviousPage()) return OpcaoAdocao.osVoltarPagina;
 
         Console.WriteLine("Não localizamos o Pokémon digitado ou a opção informada está incorreta");
         Thread.Sleep(2000);
 
-        return OpcaoSelecionada.osReexibir;
+        return OpcaoAdocao.osReexibir;
     }
 }

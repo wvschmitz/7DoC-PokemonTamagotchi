@@ -1,6 +1,6 @@
 ﻿namespace _7DoC_PokemonTamagotchi.Enum;
 
-internal enum OpcaoSelecionada
+internal enum OpcaoAdocao
 {
     osProximaPagina,
     osVoltarPagina,

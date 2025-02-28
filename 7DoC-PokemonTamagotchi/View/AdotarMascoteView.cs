@@ -1,18 +1,13 @@
-﻿using System.Xml.Linq;
-using _7DoC_PokemonTamagotchi.Controller;
+﻿using _7DoC_PokemonTamagotchi.Controller;
 using _7DoC_PokemonTamagotchi.Enum;
 using _7DoC_PokemonTamagotchi.Response;
-using _7DoC_PokemonTamagotchi.Service;
 
 namespace _7DoC_PokemonTamagotchi.View;
 
 internal class AdotarMascoteView : BaseView
 {
-    BaseController _controller;
-
-    public AdotarMascoteView(BaseController controller)
+    public AdotarMascoteView(BaseController controller) : base(controller)
     {
-        _controller = controller;
     }
 
     public string ExibirMascotes(List<ResponseNamedAPIResource> mascotes, int pagina, bool possuiPaginaAnterior)
@@ -34,21 +29,19 @@ internal class AdotarMascoteView : BaseView
         return Console.ReadLine();
     }
 
-    public OpcaoSelecionada ExibirDetalhesMascote(ResponseNamedAPIResource mascote)
+    public OpcaoAdocao ExibirDetalhesMascote(ResponsePokemon mascote)
     {
         ExibirCaption($"Informações do {mascote.Name}");
 
-        PokeAPIGetPokemon pokeAPIGetPokemon = new PokeAPIGetPokemon();
-        var pokemom = pokeAPIGetPokemon.GetPokemon(mascote.Name);
-        Console.WriteLine(pokemom.ToString());
+        Console.WriteLine(mascote.ToString());
 
         Console.WriteLine($"\n1 - Adotar o {mascote.Name}");
         Console.WriteLine("2 - Voltar a listagem");
 
         int opcao = int.Parse(Console.ReadLine());
 
-        if (opcao == 1) return OpcaoSelecionada.osAdotar;
+        if (opcao == 1) return OpcaoAdocao.osAdotar;
 
-        return OpcaoSelecionada.osReexibir;
+        return OpcaoAdocao.osReexibir;
     }
 }
