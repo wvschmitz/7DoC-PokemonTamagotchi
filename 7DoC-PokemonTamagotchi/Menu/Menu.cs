@@ -23,9 +23,9 @@ internal class Menu
         }
 
         Console.Write("\nDigite a opção desejada: ");
-        int opcao = int.Parse(Console.ReadLine());
 
-        if (_controllers.ContainsKey(opcao))
+        int opcao;
+        if ((int.TryParse(Console.ReadLine(), out opcao)) && (_controllers.ContainsKey(opcao)))
         {
             _controllers[opcao].Executar();
 

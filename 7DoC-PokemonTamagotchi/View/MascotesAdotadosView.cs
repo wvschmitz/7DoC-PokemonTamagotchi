@@ -28,21 +28,25 @@ internal class MascotesAdotadosView : BaseView
 
     public OpcaoInteracao ExibirInteracao(string nome)
     {
-        ExibirCaption($"Interagir com {nome}");
-        Console.WriteLine($"1 - Saúde");
-        Console.WriteLine($"2 - Alimentar");
-        Console.WriteLine($"3 - Brincar");
-        Console.WriteLine($"4 - Dormir");
-        Console.WriteLine($"5 - Sair");
+        while (true)
+        {
+            ExibirCaption($"Interagir com {nome}");
+            Console.WriteLine($"1 - Saúde");
+            Console.WriteLine($"2 - Alimentar");
+            Console.WriteLine($"3 - Brincar");
+            Console.WriteLine($"4 - Dormir");
+            Console.WriteLine($"5 - Sair");
 
-        int opcao = int.Parse(Console.ReadLine());
-        if (opcao == 1) return OpcaoInteracao.oiSaude;
-        if (opcao == 2) return OpcaoInteracao.oiAlimentar;
-        if (opcao == 3) return OpcaoInteracao.oiBrincar;
-        if (opcao == 4) return OpcaoInteracao.oiDormir;
-        if (opcao == 5) return OpcaoInteracao.oiSair;
+            string opcao = Console.ReadLine();
+            if (opcao == "1") return OpcaoInteracao.oiSaude;
+            if (opcao == "2") return OpcaoInteracao.oiAlimentar;
+            if (opcao == "3") return OpcaoInteracao.oiBrincar;
+            if (opcao == "4") return OpcaoInteracao.oiDormir;
+            if (opcao == "5") return OpcaoInteracao.oiSair;
 
-        return OpcaoInteracao.oiSaude;
+            Console.WriteLine("Opção inválida, informe novamente!");
+            Thread.Sleep(2000);
+        }
     }
 
     public void ExibirSaude(Mascote mascote)

@@ -46,11 +46,6 @@ internal class MascotesAdotadosController : BaseController
 
             switch (opcao)
             {
-                case OpcaoInteracao.oiSaude:
-                    {
-                        _view.ExibirSaude(mascote);
-                        break;
-                    }
                 case OpcaoInteracao.oiAlimentar:
                     {
                         mascote.Alimentar();
@@ -71,6 +66,7 @@ internal class MascotesAdotadosController : BaseController
                     }
             }
 
+            _view.ExibirSaude(mascote);
             Thread.Sleep(2000);
         }
     }
