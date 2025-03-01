@@ -2,9 +2,11 @@
 using _7DoC_PokemonTamagotchi.Enum;
 using _7DoC_PokemonTamagotchi.Model;
 using _7DoC_PokemonTamagotchi.Modelo;
+using _7DoC_PokemonTamagotchi.Profile;
 using _7DoC_PokemonTamagotchi.Response;
 using _7DoC_PokemonTamagotchi.Service;
 using _7DoC_PokemonTamagotchi.View;
+using AutoMapper;
 
 namespace _7DoC_PokemonTamagotchi.Controller;
 
@@ -12,12 +14,19 @@ internal class AdotarMascoteController : BaseController
 {
     private AdotarMascoteView _view;
     private PokeAPIGetListPokemonsName _api;
+    private IMapper _mapper;
 
     public AdotarMascoteController()
     {
         _view = new AdotarMascoteView(this);
         _api = new PokeAPIGetListPokemonsName();
         TituloMenu = "Adotar um mascote";
+
+        var config = new MapperConfiguration(cfg => {
+            cfg.AddProfile<MascoteProfile>();
+        });
+
+        _mapper = config.CreateMapper();
     }
 
     public override void Executar()
@@ -61,7 +70,7 @@ internal class AdotarMascoteController : BaseController
 
             if (selecionado == OpcaoAdocao.osAdotar)
             {
-                Jogador.Instacia.AdotarMascote(Mascote.LoadFromResponse(pokemom));
+                Jogador.Instacia.AdotarMascote(_mapper.Map<Mascote>(pokemom));
 
                 Console.WriteLine($"{detalhe.Name} adotado");
                 Thread.Sleep(2000);

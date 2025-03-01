@@ -26,23 +26,6 @@ internal class Mascote
         Habilidades.Add(habilidades);
     }
 
-    public static Mascote LoadFromResponse(ResponsePokemon pokemom)
-    {
-        var result = new Mascote();
-
-        result.Nome = pokemom.Name;
-        result.Altura = pokemom.Height;
-        result.Peso = pokemom.Weight;
-        result.Habilidades.Clear();
-        result.Habilidades.AddRange(pokemom.Abilities.Select(h => 
-            new Habilidade {
-                Nome = h.Ability.Name
-            }
-        ));
-
-        return result;
-    }
-
     public void Alimentar()
     {
         Alimentacao = Math.Min(Alimentacao +1, 10);
